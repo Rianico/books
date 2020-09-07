@@ -1,0 +1,32 @@
+{
+  "name": "zxk",
+  "version": "1.0.0",
+  "description": "兴趣使然~",
+  "main": "index.js",
+  "repository": "https://github.com/Rianico/books",
+  "author": "zxk",
+  "license": "MIT",
+  "devDependencies": {
+    "@vite/vuepress-plugin-mathjax": "^1.0.0",
+    "@vuepress/plugin-active-header-links": "^1.5.2",
+    "@vuepress/plugin-back-to-top": "^1.5.2",
+    "@vuepress/plugin-medium-zoom": "^1.5.2",
+    "@vuepress/plugin-nprogress": "^1.5.2",
+    "core-js": "2.6.5",
+    "gh-pages": "^3.1.0",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.5.3",
+    "vuepress-plugin-auto-sidebar": "^1.5.0",
+    "vuepress-plugin-mathjax": "^1.2.8",
+    "vuepress-plugin-permalink-pinyin": "^1.0.0",
+    "webpack": "^4.44.1"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "dependencies": {
+    "vuepress-theme-antdocs": "^1.1.1"
+  }
+}

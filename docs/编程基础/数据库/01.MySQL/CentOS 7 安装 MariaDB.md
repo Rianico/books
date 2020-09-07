@@ -1,0 +1,46 @@
+---
+title: CentOS 7 安装 MariaDB
+date: 2020-07-22 10:57:05
+permalink: /pages/7dacae/
+categories: 
+  - Database
+  - MySQL
+tags: 
+  - 
+---
+# CentOS 7 安装 MariaDB
+
+CentOS 7 下默认的数据库改为 MariaDB 了，使用方式跟 MySQL 基本一致，兼容 MySQL，如果要强行安装 MySQL 还需要更换 yum 源等，较为麻烦，因此决定使用默认的 MariaDB，这里记录下一些相关步骤。
+
+## 1. 安装 MariaDB
+
+```vim
+yum install mariadb mariadb-server    # 安装客户端与服务端
+systemctl start mariadb   #启动mariadb
+systemctl enable mariadb  #设置开机自启动
+
+mysql_secure_installation #设置root密码等相关
+mysql -uroot -p           #测试登录
+```
+
+这里我安装完后是 5.5.60 版本。
+
+## 2. 开启远程登录
+
+```vim
+vim /etc/my.cnf    # 修改配置文件
+
+# 在 mysqld 模块下下配置允许远程登陆
+[mysqld]
+bind-address=0.0.0.0
+
+# 登录 mysql，执行下列 sql 语句：
+grant all privileges on *.* to 'root'@'%' identified by 'password';
+flush privileges;
+
+# 验证，在其他主机执行下列命令，$ip 替换为 mariadb 节点的 ip
+mysql -uroot -h $ip -p
+```
+
+
+
