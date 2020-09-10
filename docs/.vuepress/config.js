@@ -50,6 +50,11 @@ module.exports = {
         {text: '设计模式之美', link: '/zhuan-lan-xue-xi/she-ji-mo-shi-zhi-mei/'},
         {text: '数据结构与算法', link: '/zhuan-lan-xue-xi/shu-ju-jie-gou-yu-suan-fa/'},
       ]},
+      { text: 'Linux', items: [
+        {text: '原理篇', link: '/Linux/yuan-li-pian/'},
+        {text: '运维工具', link: '/Linux/yun-wei-gong-ju/'},
+        {text: '常用命令', link: '/Linux/chang-yong-ming-ling/'},
+      ]},
       { text: '软件', link: '/ruan-jian/' },
       { text: 'Home', link: '/' }
     ],
