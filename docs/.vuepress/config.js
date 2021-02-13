@@ -30,7 +30,8 @@ module.exports = {
         {text: 'Spark', link: '/da-shu-ju/Spark/'},
         {text: 'Kafka', link: '/da-shu-ju/Kafka/'},
         {text: 'Hadoop', link: '/da-shu-ju/Hadoop/'},
-        {text: 'Hive', link: '/da-shu-ju/Hive/'}
+        {text: 'Hive', link: '/da-shu-ju/Hive/'},
+        {text: '其他', link: '/da-shu-ju/qi-ta/'},
       ]},
       { text: '编程语言', items: [
         {text: 'Java', link: '/bian-cheng-yu-yan/Java/'},
