@@ -1,12 +1,6 @@
 ---
 title: 08-xian-xing-pai-xu
 date: 2020-07-22 14:48:49
-permalink: /pages/4d335f/
-categories: 
-  - Algorithm
-  - 数据结构与算法（专栏学习）
-tags: 
-  - 
 ---
 # 08 | 桶、计数、基数排序
 

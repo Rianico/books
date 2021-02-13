@@ -1,3 +1,3 @@
-#!/usr/bin/evn bash
+#!/usr/bin/env bash
 git push -f git@github.com:Rianico/books.git vuepress
 git update-index --add --chmod=+x deploy.sh

@@ -79,7 +79,6 @@ title: big-data
 |              Balancer 的 Java 堆栈大小（字节）               |     1G     |                                                              |
 |         Failover Controller 的 Java 堆栈大小（字节）         |     1G     |                                                              |
 |          dfs.namenode.delegation.token.max-lifetime          | 2592000000 |                    token最大有效期，30天                     |
-|                  dfs.disk.balancer.enabled                   |    true    |              允许使用 hdfs 单节点磁盘 balancer               |
 |        dfs.datanode.fsdataset.volume.choosing.policy         |  可用空间  | 磁盘分配数据基于使用量策略，对应org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy |
 | dfs.datanode.available-space-volume-choosing-policy.balanced-space-threshold |    500G    |              修改为0.5T，基于使用量策略触发阈值              |
 | dfs.datanode.available-space-volume-choosing-policy.balanced-space-preference-fraction |    0.75    |        保留默认值，数据块存储到可用空间多的卷上的概率        |
@@ -190,6 +189,7 @@ sysctl -p /etc/sysctl.conf
 ## Hive
 |                      参数                      |                             调整                             |                             备注                             |
 | :--------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|        启用小文件合并 - Map-Reduce 作业        |                             true                             |          MR作业结束后启动一个map-only作业合并小文件          |
 |                  自动重启进程                  |                             true                             |                                                              |
 | Hive Metastore Server 的 Java 堆栈大小（字节） |                             32G                              |                                                              |
 |     Hive Metastore Server 的 Java 配置选项     | -Xms32g -XX:MaxPermSize=512M -XX:+UseG1GC -XX:MaxGCPauseMillis=50 -XX:InitiatingHeapOccupancyPercent=35 -XX:ConcGCThreads=16 | 原始配置：-XX:MaxPermSize=512M -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled |

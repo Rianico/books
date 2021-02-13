@@ -2,10 +2,6 @@
 title: Linux
 date: 2020-07-22 15:22:46
 permalink: /pages/ad0a15/
-categories: 
-  - Linux
-tags: 
-  - 
 ---
 # Linux
 
