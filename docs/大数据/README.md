@@ -58,32 +58,53 @@ title: big-data
 
 ## HDFS
 
-|                             参数                             |    调整    |                             备注                             |
-| :----------------------------------------------------------: | :--------: | :----------------------------------------------------------: |
-|                        dfs.block.size                        |   256MB    |                         HDFS 块大小                          |
-|                  dfs.namenode.handler.count                  |    115     |     NameNode的服务器线程的数量，根据math.log(N) * 20得出     |
-|              dfs.namenode.service.handler.count              |    115     |    NameNode 的服务器线程的数量，根据math.log(N) * 20得出     |
-|            dfs.datanode.failed.volumes.tolerated             |     3      | 在 DataNode 停止提供服务前允许失败的卷的数量。在默认情况下，卷故障会导致 DataNode 关闭。 |
-|                  dfs.datanode.handler.count                  |     24     |                   DataNode 服务器线程数。                    |
-|            dfs.namenode.avoid.read.stale.datanode            |    true    |                    避免读取失效 DataNode                     |
-|           dfs.namenode.avoid.write.stale.datanode            |    true    |                    避免写入失效 DataNode                     |
-|           dfs.blockreport.incremental.intervalMsec           |    100     | dn成功写入数据后等待100ms才批量汇总给nn，hdfs-site.xml配置`<name>dfs.blockreport.incremental.intervalMsec</name><value>300</value>` |
-|                         自动重启进程                         |    true    |                                                              |
-|                          绑定通配符                          |    true    |                                                              |
-|              DataNode 的 Java 堆栈大小（字节）               |     6G     |                                                              |
-|              NameNode 的 Java 堆栈大小（字节）               |    128G    |                                                              |
-|         Secondary NameNode 的 Java 堆栈大小（字节）          |    128G    |                                                              |
-|             JournalNode 的 Java 堆栈大小（字节）             |     4G     |                                                              |
-|               HttpFS 的 Java 堆栈大小（字节）                |    16G     |                                                              |
-|         Failover Controller 的 Java 堆栈大小（字节）         |     1G     |                                                              |
-|              Balancer 的 Java 堆栈大小（字节）               |     1G     |                                                              |
-|         Failover Controller 的 Java 堆栈大小（字节）         |     1G     |                                                              |
-|          dfs.namenode.delegation.token.max-lifetime          | 2592000000 |                    token最大有效期，30天                     |
-|        dfs.datanode.fsdataset.volume.choosing.policy         |  可用空间  | 磁盘分配数据基于使用量策略，对应org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy |
-| dfs.datanode.available-space-volume-choosing-policy.balanced-space-threshold |    500G    |              修改为0.5T，基于使用量策略触发阈值              |
-| dfs.datanode.available-space-volume-choosing-policy.balanced-space-preference-fraction |    0.75    |        保留默认值，数据块存储到可用空间多的卷上的概率        |
+|                             参数                             |       调整       |                             备注                             |
+| :----------------------------------------------------------: | :--------------: | :----------------------------------------------------------: |
+|                        dfs.block.size                        |      256MB       |                         HDFS 块大小                          |
+|                  dfs.namenode.handler.count                  |       115        |     NameNode的服务器线程的数量，根据math.log(N) * 20得出     |
+|              dfs.namenode.service.handler.count              |       115        |    NameNode 的服务器线程的数量，根据math.log(N) * 20得出     |
+|            dfs.datanode.failed.volumes.tolerated             |        3         | 在 DataNode 停止提供服务前允许失败的卷的数量。在默认情况下，卷故障会导致 DataNode 关闭。 |
+|                  dfs.datanode.handler.count                  |        24        |                   DataNode 服务器线程数。                    |
+|            dfs.namenode.avoid.read.stale.datanode            |       true       |                    避免读取失效 DataNode                     |
+|           dfs.namenode.avoid.write.stale.datanode            |       true       |                    避免写入失效 DataNode                     |
+|           dfs.blockreport.incremental.intervalMsec           |       100        | dn成功写入数据后等待100ms才批量汇总给nn，hdfs-site.xml配置`<name>dfs.blockreport.incremental.intervalMsec</name><value>300</value>` |
+|                         自动重启进程                         |       true       |                                                              |
+|                          绑定通配符                          |       true       |                                                              |
+|              DataNode 的 Java 堆栈大小（字节）               |        6G        |                                                              |
+|              NameNode 的 Java 堆栈大小（字节）               |       128G       |                                                              |
+|         Secondary NameNode 的 Java 堆栈大小（字节）          |       128G       |                                                              |
+|             JournalNode 的 Java 堆栈大小（字节）             |        4G        |                                                              |
+|               HttpFS 的 Java 堆栈大小（字节）                |       16G        |                                                              |
+|         Failover Controller 的 Java 堆栈大小（字节）         |        1G        |                                                              |
+|              Balancer 的 Java 堆栈大小（字节）               |        1G        |                                                              |
+|         Failover Controller 的 Java 堆栈大小（字节）         |        1G        |                                                              |
+|          dfs.namenode.delegation.token.max-lifetime          |    2592000000    |                    token最大有效期，30天                     |
+|        dfs.datanode.fsdataset.volume.choosing.policy         |     可用空间     | 磁盘分配数据基于使用量策略，对应org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy |
+| dfs.datanode.available-space-volume-choosing-policy.balanced-space-threshold |       500G       |              修改为0.5T，基于使用量策略触发阈值              |
+| dfs.datanode.available-space-volume-choosing-policy.balanced-space-preference-fraction |       0.75       |        保留默认值，数据块存储到可用空间多的卷上的概率        |
+|          dfs.datanode.balance.max.concurrent.moves           |  4x # of disks   |       进行 Balance 时 Datanode 迁移 Block 的最大并发数       |
+| dfs.balance.bandwidthPerSec, dfs.datanode.balance.bandwidthPerSec |  1048576 (1 MB)  |                 Datanode 用于 Balance 的带宽                 |
+|                dfs.balancer.max-size-to-move                 | 1073741824 (1GB) | Balancer 迁移文件的最大字节数，如果发现频繁超时又不想提高 Balancer 带宽时，可以缩小改值，过滤掉大文件 |
 
-在mapred-site.xml 添加如下配置：
+### 限流
+
+HDFS 内部 Block 拷贝有两条路线：
+
+1. Balancer 拷贝，可以直接指定限流速度，更多 Balancer 详细信息参照：[Configuring the Balancer](https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.6.0/bk_hdfs-administration/content/configuring_balancer.html) 
+2. Datanode 下线时恢复 block 块造成的拷贝，只能通过以下三个参数来间接限流（作用于 NameNode）：
+   - **dfs.namenode.replication.work.multiplier.per.iteration**：属于比例系数，乘以存活的 Datanode 节点数，得到计算每轮循环中每个 Datanode 能够同时拷贝的 block 块的数目，默认值 2
+   - **dfs.namenode.replication.max-streams**：一个节点的非最高优先级 block 拷贝时的线程数，默认值 2
+   - **dfs.namenode.replication.max-streams-hard-limit**：一个节点拷贝包括最高优先级 block 的线程数，默认值 4
+
+Datanode 下线造成的 block ，如果设置不当，很可能造成很高的网络 I/O 以及磁盘延迟，影响集群稳定性。
+
+如果 Datanode 频繁报以下错误，则代表 Datanode 负责传输的线程数 `dfs.datanode.max.transfer.threads` 设置过低，需要适当调高，默认 4096：
+
+```bash
+agent1:1004:DataXceiver error processing WRITE_BLOCK operation  src: /192.168.1.73:50484 dst: /192.168.1.76:1004
+```
+
+mapred-site.xml 一些杂项配置：
 
 ```xml
 <property>
@@ -132,7 +153,7 @@ title: big-data
 |       log.flush.interval.messages       |                      922337203685477600                      | 官方不建议调整，而是由vm.dirty_background_ratio以及vm.dirty_ratio控制 |
 |          log.flush.interval.ms          |                      922337203685477600                      | 官方不建议调整，而是由vm.dirty_background_ratio以及vm.dirty_ratio控制 |
 |     log.flush.scheduler.interval.ms     |                      922337203685477600                      | 官方不建议调整，而是由vm.dirty_background_ratio以及vm.dirty_ratio控制 |
-|            broker_java_opts             | -Xms8g -XX:PermSize=48m -XX:MaxPermSize=62m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:ConcGCThreads=16 |                                                              |
+|            broker_java_opts             | -Xms8g -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:ConcGCThreads=16 |                                                              |
 |          broker_max_heap_size           |                             10G                              |             Kafka进程的最大堆内存，会传递给-Xmx              |
 |              自动重启进程               |                             true                             |                                                              |
 |        auto.create.topics.enable        |                            false                             |                        自动创建topic                         |
