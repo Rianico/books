@@ -51,7 +51,7 @@ module.exports = {
         {text: '计算机组成原理', link: '/zhuan-lan-xue-xi/ji-suan-ji-zu-cheng-yuan-li/'},
         {text: '设计模式之美', link: '/zhuan-lan-xue-xi/she-ji-mo-shi-zhi-mei/'},
         {text: '数据结构与算法', link: '/zhuan-lan-xue-xi/shu-ju-jie-gou-yu-suan-fa/'},
-        {text: 'Spark性能调优实战', link: '/zhuan-lan-xue-xi/Spark-xing-neng-tiao-you-shi-zhan/'},
+        {text: 'Spark性能调优实战', link: '/zhuan-lan-xue-xi/spark-xing-neng-diao-you-shi-zhan/'},
       ]},
       { text: 'Linux', items: [
         {text: '原理篇', link: '/Linux/yuan-li-pian/'},
