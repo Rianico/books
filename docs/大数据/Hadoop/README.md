@@ -16,3 +16,9 @@ hadoop jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-mapreduce-examples.ja
 hdfs dfs -cat /mr_output/part-r-00000
 ```
 
+以可读方式解析 edit log
+
+```bash
+hdfs oev -i edit._xxxxxxxxx -o edit_myformat.xml -p XML
+```
+

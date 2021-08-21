@@ -85,6 +85,9 @@ title: big-data
 |          dfs.datanode.balance.max.concurrent.moves           |  4x # of disks   |       进行 Balance 时 Datanode 迁移 Block 的最大并发数       |
 | dfs.balance.bandwidthPerSec, dfs.datanode.balance.bandwidthPerSec |  1048576 (1 MB)  |                 Datanode 用于 Balance 的带宽                 |
 |                dfs.balancer.max-size-to-move                 | 1073741824 (1GB) | Balancer 迁移文件的最大字节数，如果发现频繁超时又不想提高 Balancer 带宽时，可以缩小改值，过滤掉大文件 |
+|                  dfs.namenode.handler.count                  |       1200       |    NameNode RPC服务端监测客户端请求的线程数，可适量增加。    |
+|              dfs.namenode.service.handler.count              |        32        | NameNode RPC服务端监测DataNode和其他请求的线程数，可适量增加。 |
+|                  dfs.datanode.handler.count                  |       512        |               DataNode服务线程数，可适量增加。               |
 
 ### 限流
 
@@ -170,8 +173,23 @@ mapred-site.xml 一些杂项配置：
 echo "vm.dirty_background_ratio = 40" >> /etc/sysctl.conf
 # 系统默认20
 echo "vm.dirty_ratio = 80" >> /etc/sysctl.conf
-sysctl -p /etc/sysctl.conf  
+sysctl -p /etc/sysctl.conf
 ```
+调整磁盘的 I/O 参数，通过牺牲一定的内存提高磁盘吞吐量
+
+```bash
+# 指定一次操作可以排队的读、写请求最大量，提高该值可以提升磁盘吞吐量
+echo 2048 > /sys/block/${device}/queue/nr_requests
+# 指定设备的队列深度，提高该值可以稍微提升一点 I/O 性能
+echo 128 > /sys/block/sda/device/queue_depth
+
+
+# 增加磁盘预读，提升顺序读大文件的性能
+echo 8192 > /sys/block/${device}/queue/read_ahead_kb
+```
+
+
+
 ----
 
 ## Kafka MirrorMaker
@@ -225,6 +243,10 @@ sysctl -p /etc/sysctl.conf
 |      hive.exec.input.listing.max.threads       |                              32                              |    Hive用于读取文件列表的线程数，读取大量分区时可提高性能    |
 |              hive.mv.files.thread              |                              32                              | Hive用于迁移数据时使用的线程，也可以在手动查询的时候另外指定 |
 |          hive.msck.repair.batch.size           |                              12                              |               执行 msck 时批量发送到 metadata                |
+|  mapreduce.job.reduce.slowstart.completedmaps  |                             0.35                             |       Map 完成的比例到达该值后才会为 Reducer 申请资源        |
+|                                                |                                                              |                                                              |
+
+
 
 在 **hive-site.xml 的 Hive 客户端高级配置代码段（安全阀）**、**hive-site.xml 的 Hive Metastore Server 高级配置代码段（安全阀）**、**hive-site.xml 的 HiveServer2 高级配置代码段（安全阀）** 添加如下配置：
 
